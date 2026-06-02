@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แจ้งร้องเรียน - ACSC Thailand</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">ACSC Thailand</div>
+            <ul class="nav-links">
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="report.html" class="active">แจ้งร้องเรียน</a></li>
+                <li><a href="check-status.html">ตรวจสอบสถานะ</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Report Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <h1>แบบฟอร์มแจ้งร้องเรียน</h1>
+            <p class="form-description">กรุณากรอกข้อมูลการฉ้อโกงให้ครบถ้วน และแนบหลักฐานที่เกี่ยวข้อง</p>
+            
+            <form id="reportForm" class="report-form">
+                <!-- Personal Information -->
+                <fieldset class="form-section-group">
+                    <legend>ข้อมูลส่วนตัว</legend>
+                    
+                    <div class="form-group">
+                        <label for="fullName">ชื่อ-นามสกุล *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">อีเมล *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">เบอร์โทรศัพท์ *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">ที่อยู่ *</label>
+                        <textarea id="address" name="address" rows="3" required></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Incident Information -->
+                <fieldset class="form-section-group">
+                    <legend>รายละเอียดการฉ้อโกง</legend>
+
+                    <div class="form-group">
+                        <label for="incidentType">ประเภทการฉ้อโกง *</label>
+                        <select id="incidentType" name="incidentType" required>
+                            <option value="">-- เลือกประเภท --</option>
+                            <option value="phishing">Phishing (ดักจับข้อมูล)</option>
+                            <option value="romance">Romance Scam (หลอกลวงทางใจ)</option>
+                            <option value="job">Job Scam (ลวงงานปลอม)</option>
+                            <option value="payment">Payment Scam (ลวงการชำระเงิน)</option>
+                            <option value="investment">Investment Scam (ลวงการลงทุน)</option>
+                            <option value="fake-account">Fake Account (บัญชีปลอม)</option>
+                            <option value="malware">Malware (ซอฟต์แวร์ร้าย)</option>
+                            <option value="other">อื่นๆ</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="incidentDate">วันที่เกิดเหตุ *</label>
+                        <input type="date" id="incidentDate" name="incidentDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="platform">แพลตฟอร์ม/ช่องทางที่เกิดเหตุ *</label>
+                        <select id="platform" name="platform" required>
+                            <option value="">-- เลือกแพลตฟอร์ม --</option>
+                            <option value="facebook">Facebook</option>
+                            <option value="twitter">Twitter</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="line">LINE</option>
+                            <option value="whatsapp">WhatsApp</option>
+                            <option value="telegram">Telegram</option>
+                            <option value="email">Email</option>
+                            <option value="website">Website</option>
+                            <option value="sms">SMS</option>
+                            <option value="other">อื่นๆ</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">รายละเอียดการฉ้อโกง *</label>
+                        <textarea id="description" name="description" rows="6" placeholder="อธิบายรายละเอียดการฉ้อโกงอย่างละเอียด" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="suspectInfo">ข้อมูลผู้ต้องสงสัย (ถ้ามี)</label>
+                        <textarea id="suspectInfo" name="suspectInfo" rows="4" placeholder="ชื่อ, ชื่อบัญชี, เบอร์โทร, ที่อยู่ เป็นต้น"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lossAmount">จำนวนเงินที่เสีย (บาท)</label>
+                        <input type="number" id="lossAmount" name="lossAmount" min="0" step="0.01">
+                    </div>
+                </fieldset>
+
+                <!-- Evidence Section -->
+                <fieldset class="form-section-group">
+                    <legend>หลักฐาน</legend>
+
+                    <div class="form-group">
+                        <label for="evidence">อัปโหลดไฟล์หลักฐาน (สกรีนช็อต, ไฟล์ เป็นต้น)</label>
+                        <input type="file" id="evidence" name="evidence" multiple accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+                        <small>รองรับไฟล์: JPG, PNG, PDF, DOC, DOCX (ขนาดสูงสุด 10MB)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="conversationLog">บันทึกการสน���นา (ถ้ามี)</label>
+                        <textarea id="conversationLog" name="conversationLog" rows="4" placeholder="คัดลอกข้อความการสนทนาที่เกี่ยวข้อง"></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Additional Information -->
+                <fieldset class="form-section-group">
+                    <legend>ข้อมูลเพิ่มเติม</legend>
+
+                    <div class="form-group">
+                        <label for="bankInfo">ข้อมูลธนาคาร (หากส่งเงินไป)</label>
+                        <textarea id="bankInfo" name="bankInfo" rows="3" placeholder="ชื่อบัญชี, เลขบัญชี, ธนาคาร เป็นต้น"></textarea>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent">ฉันยินยอมให้เก็บรักษาข้อมูลนี้เพื่อการสอบสวนและดำเนินการทางกฎหมาย *</label>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="followUp" name="followUp">
+                        <label for="followUp">ฉันยินยอมให้สื่อสารติดตามเกี่ยวกับประเด็นนี้</label>
+                    </div>
+                </fieldset>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">ส่งแบบฟอร์ม</button>
+                    <button type="reset" class="btn btn-secondary">ล้างข้อมูล</button>
+                </div>
+            </form>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="alert alert-success" style="display: none;">
+                <strong>สำเร็จ!</strong> คำร้องเรียนของคุณได้รับการบันทึกแล้ว<br>
+                <small id="caseNumber"></small>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="alert alert-error" style="display: none;">
+                <strong>เกิดข้อผิดพลาด!</strong> โปรดลองใหม่อีกครั้ง
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 ศูนย์ร้องเรียนการฉ้อโกงออนไลน์ ACSC Thailand. สงวนลิขสิทธิ์ทั้งหมด</p>
+            <div class="footer-links">
+                <a href="#">นโยบายความเป็นส่วนตัว</a>
+                <a href="#">เงื่อนไขการใช้งาน</a>
+                <a href="#">ติดต่อเรา</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
