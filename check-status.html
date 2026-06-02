@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตรวจสอบสถานะ - ACSC Thailand</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">ACSC Thailand</div>
+            <ul class="nav-links">
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="report.html">แจ้งร้องเรียน</a></li>
+                <li><a href="check-status.html" class="active">ตรวจสอบสถานะ</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Check Status Section -->
+    <section class="status-section">
+        <div class="container">
+            <h1>ตรวจสอบสถานะคำร้องเรียน</h1>
+            <p class="form-description">กรุณาระบุเลขที่คำร้องเรียนและอีเมลเพื่อตรวจสอบสถานะ</p>
+
+            <div class="search-form-container">
+                <form id="statusSearchForm" class="search-form">
+                    <div class="form-group">
+                        <label for="caseNumber">เลขที่คำร้องเรียน *</label>
+                        <input type="text" id="caseNumber" name="caseNumber" placeholder="เช่น: CASE-2026-00001" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="searchEmail">อีเมล *</label>
+                        <input type="email" id="searchEmail" name="searchEmail" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">ค้นหา</button>
+                </form>
+            </div>
+
+            <!-- Status Result -->
+            <div id="statusResult" class="status-result" style="display: none;">
+                <div class="case-header">
+                    <h2 id="resultCaseNumber"></h2>
+                    <span id="statusBadge" class="status-badge"></span>
+                </div>
+
+                <div class="case-details">
+                    <div class="detail-row">
+                        <span class="label">ชื่อผู้เสียหาย:</span>
+                        <span id="resultFullName" class="value"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">ประเภทการฉ้อโกง:</span>
+                        <span id="resultIncidentType" class="value"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">วันที่รับแจ้ง:</span>
+                        <span id="resultReportDate" class="value"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">แพลตฟอร์ม:</span>
+                        <span id="resultPlatform" class="value"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">จำนวนเงินที่เสีย:</span>
+                        <span id="resultLossAmount" class="value"></span>
+                    </div>
+                </div>
+
+                <!-- Status Timeline -->
+                <div class="status-timeline">
+                    <h3>ขั้นตอนการจัดการ</h3>
+                    <div class="timeline">
+                        <div class="timeline-item" id="receivedStatus">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>รับแจ้งแล้ว</h4>
+                                <p id="receivedDate"></p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" id="verifyingStatus">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>กำลังตรวจสอบ</h4>
+                                <p id="verifyingDate"></p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" id="investigatingStatus">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>กำลังสอบสวน</h4>
+                                <p id="investigatingDate"></p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" id="completedStatus">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>เสร็จสิ้น</h4>
+                                <p id="completedDate"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Notes -->
+                <div class="case-notes">
+                    <h3>หมายเหตุจากทีมตรวจสอบ</h3>
+                    <p id="resultNotes"></p>
+                </div>
+
+                <!-- Case Summary -->
+                <div class="case-summary">
+                    <h3>สรุปการสอบสวน (หากเสร็จสิ้นแล้ว)</h3>
+                    <p id="resultSummary"></p>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="statusError" class="alert alert-error" style="display: none;">
+                <strong>ไม่พบข้อมูล!</strong> โปรดตรวจสอบเลขที่คำร้องเรียนและอีเมลอีกครั้ง
+            </div>
+
+            <!-- Loading -->
+            <div id="statusLoading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>กำลังค้นหาข้อมูล...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>คำถามที่พบบ่อย</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">ใช้เวลานานเท่าไหร่ในการตรวจสอบคำร้องเรียน?</button>
+                    <div class="faq-answer">
+                        <p>โดยปกติจะใช้เวลา 5-10 วันในการตรวจสอบเบื้องต้น และ 2-4 สัปดาห์สำหรับการสอบสวนอย่างละเอียด</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">ฉันหลังจากส่งคำร้องเรียนจะได้รับการติดต่อหรือไม่?</button>
+                    <div class="faq-answer">
+                        <p>ใช่ ทีมของเราจะติดต่อคุณทางอีเมลหรือโทรศัพท์หากต้องการข้อมูลเพิ่มเติม</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">ข้อมูลส่วนตัวของฉันจะปลอดภัยหรือไม่?</button>
+                    <div class="faq-answer">
+                        <p>ข้อมูลของคุณถูกเก็บรักษาอย่างปลอดภัยและจะใช้เพื่อวัตถุประสงค์ของการสอบสวนเท่านั้น</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 ศูนย์ร้องเรียนการฉ้อโกงออนไลน์ ACSC Thailand. สงวนลิขสิทธิ์ทั้งหมด</p>
+            <div class="footer-links">
+                <a href="#">นโยบายความเป็นส่วนตัว</a>
+                <a href="#">เงื่อนไขการใช้งาน</a>
+                <a href="#">ติดต่อเรา</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
